@@ -1,0 +1,40 @@
+.form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input {
+    display: flex;
+    width: 400px;
+    height : 36px;
+    padding: 0 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.3s;
+}
+
+.input:focus {
+
+    border: 1px solid #0077ff;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 60px;
+    border-radius: 6px;
+    border: none;
+    background-color: #0077ff;
+    color: white;
+    font-size: 12px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #5daeff;
+}
