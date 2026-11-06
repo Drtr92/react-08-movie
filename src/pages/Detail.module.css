@@ -5,9 +5,23 @@
     align-items: center;
 }
 
+.header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+}
+
+.dummy {
+    display: flex;
+    width: 86px;
+    height: 20px;
+}
+
 .backButton {
     display: block;
-    padding: 12px 10px;
+    padding: 8px 6px;
     border: none;
     background-color: #0077ff;
     color: white;

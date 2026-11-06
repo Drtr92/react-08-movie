@@ -20,14 +20,17 @@ function Detail() {
 
     return (
         <div className={styles.container}>
-            <button
-                className={styles.backButton}
-                onClick={() => {
-                    navigate(-1);
-                }}>
-                &larr; 뒤로가기
-            </button>
-            <SearchBar keyword={""} />
+            <div className={styles.header}>
+                <button
+                    className={styles.backButton}
+                    onClick={() => {
+                        navigate(-1);
+                    }}>
+                    &larr; 뒤로가기
+                </button>
+                <SearchBar keyword={""} />
+                <div className={styles.dummy}></div>
+            </div>
             {detailDescription.Poster ? (
                 <img src={detailDescription.Poster} alt={detailDescription.Title} />
             ) : (
