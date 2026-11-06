@@ -9,7 +9,8 @@ function Search() {
     const navigate = useNavigate();
 
     const [list, setList] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
     const card = list.map((item, i) => {
         return (
@@ -19,10 +20,12 @@ function Search() {
                 ) : (
                     <div className={styles.noImg}>"No image"</div>
                 )}
-                <div>{item.Title}</div>
-                <div className={styles.cardDescriptions}>
-                    <div>{item.Type}</div>
-                    <div>{item.Year}</div>
+                <div className={styles.cardTag}>
+                    <div>{item.Title}</div>
+                    <div className={styles.cardDescriptions}>
+                        <div>{item.Type}</div>
+                        <div>{item.Year}</div>
+                    </div>
                 </div>
             </Link>
         );
@@ -31,12 +34,17 @@ function Search() {
     useEffect(() => {
         if (!keyword) return;
         // eslint-disable-next-line
-        setLoading(true);
+        setList([]);
+        setError("");
 
         fetch(`https://www.omdbapi.com/?apikey=6a0a8eb4&s=${keyword}`)
             .then(res => res.json())
             .then(json => setList(json.Search || []))
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.log(err);
+                setList([]);
+                setError("검색하는데 오류가 발생하였습니다.");
+            })
             .finally(() => setLoading(false));
     }, [keyword]);
 
@@ -49,21 +57,17 @@ function Search() {
                         navigate("/");
                     }}>
                     {" "}
-                    &larr; 뒤로가기
+                    &larr; 홈으로
                 </button>
-                <div>
+                <div className={styles.headerCen}>
                     <h1>검색 키워드 : {keyword}</h1>
                     <SearchBar keyword={keyword} />
+                    {loading && <p>Loading...</p>}
+                    {error && <p>{error}</p>}
                 </div>
-                <div></div>
+                <div className={styles.dummy}></div>
             </div>
-            {loading ? (
-                <div> LOADING ... </div>
-            ) : list.length === 0 ? (
-                <div> No results found for '{keyword}'. </div>
-            ) : (
-                <div className={styles.cardZone}>{card}</div>
-            )}
+            <div className={styles.cardZone}>{card}</div>
         </div>
     );
 }

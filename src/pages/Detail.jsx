@@ -1,10 +1,11 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar.jsx";
+import styles from "./Detail.module.css";
 
 function Detail() {
     const navigate = useNavigate();
-    const {id} = useParams();
+    const { id } = useParams();
 
     const [detailDescription, setDetailDescription] = useState(null);
 
@@ -15,15 +16,15 @@ function Detail() {
             .catch(err => console.log(err));
     }, [id]);
 
-    if (!detailDescription) return;
+    if (!detailDescription) return <p>Loading...</p>;
 
     return (
-        <div>
+        <div className={styles.container}>
             <button
+                className={styles.backButton}
                 onClick={() => {
                     navigate(-1);
                 }}>
-                {" "}
                 &larr; 뒤로가기
             </button>
             <SearchBar keyword={""} />
@@ -33,11 +34,26 @@ function Detail() {
                 <div>"No image"</div>
             )}
             <div>{detailDescription.Title}</div>
-            <div>{detailDescription?.Year}</div>
-            <div>{detailDescription?.Released}</div>
-            <div>{detailDescription?.Genre}</div>
-            <div>{detailDescription?.Director}</div>
-            <div>{detailDescription?.Plot}</div>
+            <div>
+                <strong>Year</strong>
+                {detailDescription?.Year}
+            </div>
+            <div>
+                <strong>Released</strong>
+                {detailDescription?.Released}
+            </div>
+            <div>
+                <strong>Genre</strong>
+                {detailDescription?.Genre}
+            </div>
+            <div>
+                <strong>Director</strong>
+                {detailDescription?.Director}
+            </div>
+            <div>
+                <strong>Plot</strong>
+                {detailDescription?.Plot}
+            </div>
         </div>
     );
 }

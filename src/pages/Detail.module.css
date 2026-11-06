@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backButton {
+    display: block;
+    padding: 12px 10px;
+    border: none;
+    background-color: #0077ff;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+}
+
+.backButton:hover {
+    background-color: #5daeff;
+}
