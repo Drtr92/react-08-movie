@@ -1,12 +1,33 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import styles from "./SearchBar.module.css"
+import styled from "styled-components";
 
-function SearchBar({keyword}) {
-    const [input, setInput] = useState(keyword || "")
-    const navigate = useNavigate()
+const Form = styled.form`
+    display: flex;
+    gap: 10px;
+`;
 
-    const handleChange = (e) => setInput(e.target.value)
+const Input = styled.input`
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+`;
+
+const Button = styled.button`
+    padding: 12px;
+    background-color: #ff5959;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+`;
+
+function SearchBar({ keyword }) {
+    const [input, setInput] = useState(keyword || "");
+    const navigate = useNavigate();
+
+    const handleChange = e => setInput(e.target.value);
     const handleSubmit = e => {
         e.preventDefault();
         const k = input.trim();
@@ -22,20 +43,16 @@ function SearchBar({keyword}) {
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit}>
-            <input
-                className={styles.input}
+        <Form onSubmit={handleSubmit}>
+            <Input
                 onChange={handleChange}
                 value={input}
                 placeholder={"Search movies..."}
                 autoComplete={"off"}
                 spellCheck={false}
             />
-            <button className={styles.button} type={"submit"}>
-                Search
-            </button>
-        </form>
-
+            <Button type={"submit"}>Search</Button>
+        </Form>
     );
 }
 

@@ -1,7 +1,24 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar.jsx";
-import styles from "./Detail.module.css";
+import { Container } from "./Home.jsx";
+import styled from "styled-components";
+
+// eslint-disable-next-line
+export const BackBtn = styled.button`
+    display: block;
+    margin-bottom: 20px;
+    background-color: #ff5959;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 6px;
+
+    &:hover {
+        background-color: #ffaaaa;
+    }
+`;
 
 function Detail() {
     const navigate = useNavigate();
@@ -19,17 +36,16 @@ function Detail() {
     if (!detailDescription) return <p>Loading...</p>;
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <button
-                    className={styles.backButton}
+        <Container>
+            <div>
+                <BackBtn
                     onClick={() => {
                         navigate(-1);
                     }}>
                     &larr; 뒤로가기
-                </button>
+                </BackBtn>
                 <SearchBar keyword={""} />
-                <div className={styles.dummy}></div>
+                <div></div>
             </div>
             {detailDescription.Poster ? (
                 <img src={detailDescription.Poster} alt={detailDescription.Title} />
@@ -57,7 +73,7 @@ function Detail() {
                 <strong>Plot</strong>
                 {detailDescription?.Plot}
             </div>
-        </div>
+        </Container>
     );
 }
 

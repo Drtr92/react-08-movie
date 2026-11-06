@@ -1,7 +1,18 @@
 import SearchBar from "../components/SearchBar.jsx";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router";
-import styles from "./Search.module.css";
+import { useNavigate, useSearchParams } from "react-router";
+import { Container } from "./Home.jsx";
+import { BackBtn } from "./Detail.jsx";
+import styled from "styled-components";
+import MovieCard from "../components/MovieCard.jsx";
+
+const List = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 100px;
+    justify-content: center;
+`;
 
 function Search() {
     const [searchParams] = useSearchParams();
@@ -11,25 +22,6 @@ function Search() {
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-
-    const card = list.map((item, i) => {
-        return (
-            <Link key={i} to={`/detail/${item.imdbID}`} className={styles.cards}>
-                {item.Poster ? (
-                    <img className={styles.cardImg} src={item.Poster} alt={item.Title} />
-                ) : (
-                    <div className={styles.noImg}>"No image"</div>
-                )}
-                <div className={styles.cardTag}>
-                    <div>{item.Title}</div>
-                    <div className={styles.cardDescriptions}>
-                        <div>{item.Type}</div>
-                        <div>{item.Year}</div>
-                    </div>
-                </div>
-            </Link>
-        );
-    });
 
     useEffect(() => {
         if (!keyword) return;
@@ -49,26 +41,29 @@ function Search() {
     }, [keyword]);
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
-                <button
-                    className={styles.backButton}
+        <Container>
+            <div>
+                <BackBtn
                     onClick={() => {
                         navigate("/");
                     }}>
                     {" "}
                     &larr; 홈으로
-                </button>
-                <div className={styles.headerCen}>
+                </BackBtn>
+                <div>
                     <h1>검색 키워드 : {keyword}</h1>
                     <SearchBar keyword={keyword} />
                     {loading && <p>Loading...</p>}
                     {error && <p>{error}</p>}
                 </div>
-                <div className={styles.dummy}></div>
+                <div></div>
             </div>
-            <div className={styles.cardZone}>{card}</div>
-        </div>
+            <List>
+                {Array.isArray(list)
+                    ? list.map((item, index) => <MovieCard key={index} movie={item} />)
+                    : "검색결과가 없습니다."}
+            </List>
+        </Container>
     );
 }
 

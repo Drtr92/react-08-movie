@@ -1,15 +1,23 @@
 import SearchBar from "../components/SearchBar.jsx";
-import styles from "./Home.module.css";
+import styled from "styled-components";
+
+// eslint-disable-next-line
+export const Container = styled.div`
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+`;
 
 function Home() {
     return (
-        <div className={styles.container}>
-            <div className={styles.center}>
+        <Container>
+            <div>
                 <h1>OMD Flicks</h1>
                 <SearchBar keyword={""} />
             </div>
-        </div>
+        </Container>
     );
 }
 
-export default Home
+export default Home;
