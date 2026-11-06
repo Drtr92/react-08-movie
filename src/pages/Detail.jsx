@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
+import SearchBar from "../components/SearchBar.jsx";
 
 function Detail() {
     const navigate = useNavigate();
@@ -25,6 +26,7 @@ function Detail() {
                 {" "}
                 &larr; 뒤로가기
             </button>
+            <SearchBar keyword={""} />
             {detailDescription.Poster ? (
                 <img src={detailDescription.Poster} alt={detailDescription.Title} />
             ) : (

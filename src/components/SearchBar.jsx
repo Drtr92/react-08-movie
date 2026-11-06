@@ -7,19 +7,36 @@ function SearchBar({keyword}) {
     const navigate = useNavigate()
 
     const handleChange = (e) => setInput(e.target.value)
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
         const k = input.trim();
         if (!k) return;
+        // 영문, 숫자, 공백, 일부 기본 특수문자(-, :, ')만 허용하는 정규식
+        const isValidKeyword = /^[a-zA-Z0-9\s\-:']+$/.test(k);
+
+        if (!isValidKeyword) {
+            alert("영화 제목은 영문으로만 검색해 주세요! (예: Batman, Parasite)");
+            return;
+        }
         navigate(`/Search?keyword=${encodeURIComponent(k)}`);
-    }
+    };
 
     return (
-        <form  className={styles.form} onSubmit={handleSubmit}>
-            <input className={styles.input} onChange={handleChange} value={input} />
-            <button className={styles.button} type={"submit"}>Search</button>
+        <form className={styles.form} onSubmit={handleSubmit}>
+            <input
+                className={styles.input}
+                onChange={handleChange}
+                value={input}
+                placeholder={"Search movies..."}
+                autoComplete={"off"}
+                spellCheck={false}
+            />
+            <button className={styles.button} type={"submit"}>
+                Search
+            </button>
         </form>
-    )
+
+    );
 }
 
 export default SearchBar;
