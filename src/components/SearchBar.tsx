@@ -23,7 +23,15 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-function SearchBar( { keyword }:{keyword : string} ) {
+/*
+  Props의 타입을 지정해주기 위한 방법
+
+  2. 내부 코드 진행 상 input 태그의 값으로 input이라는 state가 존재하고
+     그러므로 input state는 string 타입이어야 하고
+     그에 대한 초기값인 keyword는 당연히 string 타입이어야 하는구나
+*/
+
+function SearchBar( { keyword }:{ keyword : string } ) {
     const [input, setInput] = useState(keyword || "");
     const navigate = useNavigate();
 
