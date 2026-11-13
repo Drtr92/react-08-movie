@@ -21,11 +21,19 @@ export const BackBtn = styled.button`
     }
 `;
 
+type MovieDetail = MovieList & {
+    Released: string;
+    Genre: string;
+    Director: string | string[];
+    Plot: string;
+    Type: string;
+};
+
 function Detail() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const [detailDescription, setDetailDescription] = useState< MovieList | null >(null);
+    const [detailDescription, setDetailDescription] = useState<MovieDetail | null>(null);
 
     useEffect(() => {
         fetch(`https://www.omdbapi.com/?apikey=6a0a8eb4&i=${id}&plot=full`)
