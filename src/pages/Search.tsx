@@ -21,6 +21,10 @@ type ApiResponse = {
 export type MovieList = {
     Title: string;
     Year: string;
+    Released: string;
+    Genre: string;
+    Director: string | [];
+    Plot: string;
     imdbID: string;
     Type: string;
     Poster: string;
@@ -75,7 +79,7 @@ function Search() {
                 <div></div>
             </div>
             <List>
-                {Array.isArray(list)
+                {list.length > 0
                     ? list.map((item, index) => <MovieCard key={index} movie={item} />)
                     : "검색결과가 없습니다."}
             </List>
