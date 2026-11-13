@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import SearchBar from "../components/SearchBar.jsx";
-import { Container } from "./Home.jsx";
+import SearchBar from "../components/SearchBar.tsx";
+import { Container } from "./Home.tsx";
 import styled from "styled-components";
 
 // eslint-disable-next-line
@@ -20,11 +20,21 @@ export const BackBtn = styled.button`
     }
 `;
 
+type DetailType = {
+    Poster: string;
+    Title: string;
+    Year: string;
+    Released: string;
+    Genre: string;
+    Director: string|[];
+    Plot: string;
+}
+
 function Detail() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const [detailDescription, setDetailDescription] = useState(null);
+    const [detailDescription, setDetailDescription] = useState<DetailType|null>(null);
 
     useEffect(() => {
         fetch(`https://www.omdbapi.com/?apikey=6a0a8eb4&i=${id}&plot=full`)

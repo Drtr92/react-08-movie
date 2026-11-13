@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type ChangeEvent, type SubmitEvent, useState } from "react";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
 
@@ -23,12 +23,12 @@ const Button = styled.button`
     cursor: pointer;
 `;
 
-function SearchBar({ keyword }) {
+function SearchBar( { keyword }:{keyword : string} ) {
     const [input, setInput] = useState(keyword || "");
     const navigate = useNavigate();
 
-    const handleChange = e => setInput(e.target.value);
-    const handleSubmit = e => {
+    const handleChange = (e:ChangeEvent<HTMLInputElement, HTMLInputElement>) => setInput(e.target.value);
+    const handleSubmit = (e:SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         const k = input.trim();
         if (!k) return;
