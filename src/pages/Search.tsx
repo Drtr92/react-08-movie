@@ -23,7 +23,7 @@ export type MovieList = {
     Year: string;
     Released: string;
     Genre: string;
-    Director: string | [];
+    Director: string | string[];
     Plot: string;
     imdbID: string;
     Type: string;
